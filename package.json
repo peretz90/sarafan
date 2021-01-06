@@ -1,0 +1,26 @@
+{
+  "name": "sarafan",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "repository": "https://github.com/peretz90/sarafan.git",
+  "author": "peretz90 <peretz90@mail.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-resource": "^1.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
