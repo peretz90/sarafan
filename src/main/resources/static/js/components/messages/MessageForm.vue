@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <label>
-      <input type="text" placeholder="Write something" v-model="text" />
-    </label>
-    <input type="button" value="Save" @click="save" />
-  </div>
+  <v-layout row>
+    <v-text-field
+        label="New message"
+        placeholder="Write something"
+        v-model="text"
+    />
+    <v-btn @click="save">
+      Save
+    </v-btn>
+  </v-layout>
 </template>
 
 <script>
-function getIndex(list, id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id === id) {
-      return i
-    }
-  }
-  return -1
-}
+import messagesApi from 'api/messages'
+
 export default {
   name: "MessageForm",
   props: ['messages', 'messageAttr'],
@@ -33,25 +31,32 @@ export default {
   },
   methods: {
     save() {
-      const message = { text: this.text }
+      const message = {
+        id: this.id,
+        text: this.text
+      }
 
       if (this.id) {
-        this.$resource('/message{/id}').update({id: this.id}, message).then(r =>
+        messagesApi.update(message).then(r =>
             r.json().then(data => {
-              const index = getIndex(this.messages, data.id)
+              const index = this.message.findIndex(item => item === data.id)
               this.messages.splice(index, 1, data)
-              this.text = ''
-              this.id = ''
             })
         )
       } else {
-        this.$resource('/message{/id}').save({}, message).then(r =>
+        messagesApi.add(message).then(r =>
             r.json().then(data => {
-              this.messages.push(data)
-              this.text = ''
+              const index = this.message.findIndex(item => item === data.id)
+              if (index > -1) {
+               this.messages.splice(index, 1, data)
+              } else {
+                this.messages.push(data)
+              }
             })
         )
       }
+      this.text = ''
+      this.id = ''
     }
   }
 }
