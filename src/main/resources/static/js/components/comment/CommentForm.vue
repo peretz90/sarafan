@@ -1,15 +1,17 @@
 <template>
-  <v-layout row>
-    <v-text-field
-        label="Add comment"
-        placeholder="Write something"
-        v-model="text"
-        @keyup.enter="save"
-    />
-    <v-btn @click="save">
-      Add
-    </v-btn>
-  </v-layout>
+  <v-container>
+    <v-layout row class="px-3">
+      <v-text-field
+          label="Add comment"
+          placeholder="Write something"
+          v-model="text"
+          @keyup.enter="save"
+      />
+      <v-btn @click="save">
+        Add
+      </v-btn>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
